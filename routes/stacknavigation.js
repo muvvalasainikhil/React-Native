@@ -5,6 +5,7 @@ import HomeComponent from "../components/Home";
 import ProductDetailComponent from "../components/Productdetail";
 import { TextInput } from "react-native-gesture-handler";
 import AddProductComponent from "../components/AddProduct";
+import UpdateProductComponent from "../components/UpdateProduct";
 
 const Stack = createStackNavigator();
 
@@ -32,6 +33,11 @@ function MyStackNavigator() {
           component={AddProductComponent}
         ></Stack.Screen>
       </Stack.Navigator>
+
+      <Stack.Screen
+        name="UPDATE_PRODUCT"
+        component={UpdateProductComponent}
+      ></Stack.Screen>
     </NavigationContainer>
   );
 }

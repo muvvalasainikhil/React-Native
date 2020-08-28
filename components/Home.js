@@ -18,6 +18,11 @@ export default function HomeComponent({ navigation }) {
       setOriginalList(res.data);
     });
   }, []);
+  const deleteItem = (id) => {
+    axios.delete("http://localhost:3000/allProducts/" + id).then((res) => {
+      console.log(res.data);
+    });
+  };
   return (
     <ScrollView>
       <TextInput
@@ -44,11 +49,29 @@ export default function HomeComponent({ navigation }) {
             >
               <Image
                 source={require("../assets/images/" + prod.imageUrl)}
-                style={{ width: 230, height: 230 }}
+                style={{ width: 270, height: 300 }}
               />
               <Text style={mystyle.textstyle}>{prod.name}</Text>
               <Text>Category: {prod.category}</Text>
             </TouchableOpacity>
+            <View style={mystyle.detebutton}>
+              <Button
+                onPress={() => {
+                  deleteItem(prod.id);
+                }}
+                color="#ff0000"
+                title="Delete"
+              ></Button>
+            </View>
+            <View style={mystyle.updatebutton}>
+              <Button
+                onPress={() => {
+                  navigation.navigate("UPDATE_PRODUCT", { item: prod });
+                }}
+                color="#00ff00"
+                title="Update"
+              ></Button>
+            </View>
           </View>
         );
       })}
@@ -84,7 +107,7 @@ const mystyle = StyleSheet.create({
     fontWeight: "bold",
   },
   searchbar: {
-    width: 1200,
+    width: 200,
     textAlignVertical: "center",
     textAlign: "center",
     marginLeft: 59,
@@ -94,7 +117,7 @@ const mystyle = StyleSheet.create({
   },
   addButton: {
     width: 200,
-    marginLeft: 1005,
+    marginLeft: 100,
     marginTop: 11,
   },
 });
